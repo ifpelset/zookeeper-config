@@ -1,0 +1,49 @@
+group = 'com.dfsx.library.zookeeperconfig'
+version = '1.0.0'
+
+println "project name: ${project.name}"
+println "build directory: ${project.buildDir}"
+
+//gradle wrapper intends to be portable
+task wrapper(type: Wrapper) {
+    distributionUrl = "http://services.gradle.org/distributions/gradle-$gradleVersion-all.zip"
+}
+
+//build configration
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+sourceCompatibility = 1.8 //language level
+targetCompatibility = 1.8 //bytecode generated level
+
+dependencies {
+//	compile "org.springframework:spring-context:$springVersion"
+    compile "commons-logging:commons-logging:$jclVersion" //common logging interface
+	compile "org.apache.logging.log4j:log4j-api:$log4j2Version" //log4j 2
+    compile "org.apache.logging.log4j:log4j-core:$log4j2Version" //log4j 2
+    compile "org.apache.logging.log4j:log4j-jcl:$log4j2Version" //commons-logging over log4j 2
+    compile "org.apache.zookeeper:zookeeper:$zookeeperVersion"
+    testCompile "junit:junit:$junitVersion" //unit test
+}
+
+jar {
+    manifest {
+        attributes 'Manifest-Version': '1.0'
+        attributes "Implementation-Title": project.name
+        attributes "Implementation-Version": version
+    }
+}
+
+

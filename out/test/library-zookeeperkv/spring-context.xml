@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean class="com.dfsx.thrift.spring.server.ThriftServerScannerConfigurer">
+        <property name="basePackage" value="com.dfsx.thrift.spring.test.service.impl" />
+        <property name="port" value="12345" />
+    </bean>
+
+    <bean class="com.dfsx.thrift.spring.client.ThriftClientScannerConfigurer">
+        <property name="basePackage" value="com.dfsx.thrift.spring.test.service" />
+        <property name="host" value="localhost" />
+        <property name="port" value="12345" />
+    </bean>
+</beans>
